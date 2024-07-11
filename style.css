@@ -1,0 +1,82 @@
+h1 {
+    border: 4px #eee solid;
+    color: forestgreen;
+    text-align: center;
+    padding: 10px;
+}
+
+h2 {
+    font-family: 'Lucida Sans';
+    color: navy;
+    text-align: center;
+}
+
+form{
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="number"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #004d99;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#map {
+    width: 80%;
+    max-width: 600px;
+    height: 500px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#trailList {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    list-style-type: none;
+}
+
+#trailList li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#trailList li:last-child {
+    border-bottom: none;
+}
