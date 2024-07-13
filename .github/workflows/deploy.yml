@@ -1,40 +1,42 @@
-name: Deploy to GitHub Pages
+name: Deploy Website to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Adjust branch name as needed
+      - main  # Adjust as per your branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
+    env:
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Replace API key in index.html
+        run: |
+          sed -i "s/YOUR_PLACEHOLDER_API_KEY/${GOOGLE_API_KEY}/g" index.html
+
+      - name: Configure Python environment
+        uses: actions/setup-python@v2
         with:
-          node-version: '14'
+          python-version: '3.x'  # Specify your Python version
 
       - name: Install dependencies
-        run: npm install  # Replace with your package manager command if not using npm
-
-      - name: Replace API Key in index.html
         run: |
-          sed -i "s/YOUR_PLACEHOLDER_API_KEY$GOOGLE_API_KEY/g" index.html
+          pip install -r requirements.txt  # Adjust as per your requirements
 
-      - name: Show updated index.html
-        run: cat index.html  # Optional: Output the updated index.html to see changes
-
-      - name: Build and deploy
-        run: |
-          npm run build  # Adjust if you have a different build command
-          npm run deploy  # Adjust if you have a different deployment command
+      - name: Run Python script (app.py)
+        run: python app.py  # Adjust as per your script's requirements
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # Adjust to the directory where your built files are
+          branch: gh-pages  # Specify your deployment branch
+          folder: .  # Specify the root folder for GitHub Pages deployment
+
+      # Add further steps for your deployment process
+
