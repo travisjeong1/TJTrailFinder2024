@@ -3,7 +3,7 @@ name: Deploy Website to GitHub Pages
 on:
   push:
     branches:
-      - main  # Adjust as per your branch
+      - main
 
 jobs:
   deploy:
@@ -23,20 +23,19 @@ jobs:
       - name: Configure Python environment
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Specify your Python version
+          python-version: '3.x'
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt  # Adjust as per your requirements
+          pip install -r requirements.txt
 
       - name: Run Python script (app.py)
-        run: python app.py  # Adjust as per your script's requirements
+        run: python app.py
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          branch: gh-pages  # Specify your deployment branch
-          folder: .  # Specify the root folder for GitHub Pages deployment
+          branch: gh-pages
+          folder: .
 
       # Add further steps for your deployment process
-
