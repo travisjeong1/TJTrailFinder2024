@@ -10,19 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Replace API Key in index.html
-      run: |
-        sed -i "s/YOUR_API_PLACEHOLDER_KEY/secrets.GOOGLE_API_KEY/g" index.html
+      - name: Replace API Key in index.html
+        run: sed -i "s/YOUR_PLACEHOLDER_API_KEY/${{ secrets.GOOGLE_API_KEY }}/g" index.html
 
-    - name: Show updated index.html
-      run: cat index.html  # Optional: Output the updated index.html to see changes
+      - name: Show updated index.html
+        run: cat index.html  # Optional: Output the updated index.html to see changes
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: secrets.GITHUB_TOKEN
-        publish_dir: .  # Adjust if your index.html is in a subdirectory
-        publish_branch: gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .  # Adjust if your index.html is in a subdirectory
+          publish_branch: gh-pages
