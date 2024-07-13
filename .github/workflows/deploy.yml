@@ -1,4 +1,4 @@
-name: Deploy Website to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -6,36 +6,20 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    
-    env:
-      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Replace API key in index.html
+      - name: Replace API Key in index.html
         run: |
-          sed -i "s/YOUR_PLACEHOLDER_API_KEY/${GOOGLE_API_KEY}/g" index.html
-
-      - name: Configure Python environment
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Run Python script (app.py)
-        run: python app.py
+          sed -i 's/API_KEY/${{ secrets.API_KEY }}/g' index.html
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          folder: .
-
-      # Add further steps for your deployment process
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .  # Since index.html is in the root, deploy from the root directory
+          publish_branch: gh-pages  # Adjust if your deployment branch is different
