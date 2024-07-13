@@ -1,3 +1,5 @@
+import config from './config.js'; // Adjust the path as per your project structure
+
 // Initialize map
 function initMap(){
     // Map options
@@ -109,7 +111,7 @@ function createMarker(place, map, userLocation) {
     google.maps.event.addListener(marker, 'click', function() {
         var infowindow = new google.maps.InfoWindow({
             content: `${place.name}<br>Distance: ${distance.toFixed(2)} miles<br>Rating: ${place.rating ? place.rating : 'No rating available'}` // Display the place's name, distance, and rating in the InfoWindow
-        });          //not complicated, just take note of syntax
+        });
         infowindow.open(map, marker);
 
         // Make sure infowindows close after 2 seconds
@@ -145,12 +147,14 @@ function addTrailToList(place, userLocation) {
     trailList.appendChild(listItem);
 }
 
-// Fetch API key from environment variable
-const API_KEY = process.env.API_KEY;
-
 // Load Google Maps API with API key
-var script = document.createElement('script');
-script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places,geometry&callback=initMap`;
-script.defer = true;
-script.async = true;
-document.head.appendChild(script);
+function loadGoogleMaps() {
+    var script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${config.API_KEY}&libraries=places,geometry&callback=initMap`;
+    script.defer = true;
+    script.async = true;
+    document.head.appendChild(script);
+}
+
+// Call function to load Google Maps API
+loadGoogleMaps();
