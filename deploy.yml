@@ -13,23 +13,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build project
-      run: npm run build
-
     - name: Replace API Key in index.html
       run: |
-        sed -i 's/API/${{ secrets.GOOGLE_API_KEY }}/g' index.html
+        sed -i 's/YOUR_API_KEY_PLACEHOLDER/${{ secrets.API_KEY }}/g' index.html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build  # Adjust to your actual build directory
+        publish_dir: .  # Since index.html is in the root, deploy from the root directory
+        publish_branch: gh-pages  # Adjust if your deployment branch is different
