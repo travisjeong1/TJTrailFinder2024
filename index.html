@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>TrailFinder</title>
     <!-- Link to CSS file -->
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Welcome to TrailFinder</h1>
@@ -25,16 +25,9 @@
     <h2>Trail Results</h2>
     <ul id="trailList"></ul>
 
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjJp_LAEc0aMqAmiFQDSnbWm8X3z9SRTE&libraries=places,geometry&callback=initMap"></script>
+
     <script>
-        // Replace AIzaSyAjJp_LAEc0aMqAmiFQDSnbWm8X3z9SRTE with the actual API key during the GitHub Actions build process
-        var googleMapsApiKey = 'AIzaSyAjJp_LAEc0aMqAmiFQDSnbWm8X3z9SRTE';
-
-        // Load Google Maps script dynamically
-        var script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geometry&callback=initMap`;
-        script.defer = true;
-        document.head.appendChild(script);
-
         // Initialize map
         function initMap(){
             // Map options
@@ -72,8 +65,8 @@
             else return 10; 
         }
 
-        // Function to clear the trail list
-        function clearTrailList() {
+                // Function to clear the trail list
+                function clearTrailList() {
             var trailList = document.getElementById('trailList');
             trailList.innerHTML = ''; // Clear all child elements
         }
@@ -129,7 +122,7 @@
                 }
             });
         }
-
+        
         // Create markers for all the identified trails/parks
         function createMarker(place, map, userLocation) {
             var marker = new google.maps.Marker({
@@ -146,7 +139,7 @@
             google.maps.event.addListener(marker, 'click', function() {
                 var infowindow = new google.maps.InfoWindow({
                     content: `${place.name}<br>Distance: ${distance.toFixed(2)} miles<br>Rating: ${place.rating ? place.rating : 'No rating available'}` // Display the place's name, distance, and rating in the InfoWindow
-                });
+                });          //not complicated, just take note of syntax
                 infowindow.open(map, marker);
 
                 // Make sure infowindows close after 2 seconds
@@ -155,7 +148,7 @@
                 }, 2000);
             });
         }
-
+        
         // Add trail to the list with a Google search link and distance
         function addTrailToList(place, userLocation) {
             var trailList = document.getElementById('trailList');
@@ -173,7 +166,7 @@
             distanceText.textContent = ` - ${distance.toFixed(2)} miles`;
 
             // Add rating
-            var ratingText = document.createElement('span'); // Uses a span element to display if there is no rating available
+            var ratingText = document.createElement('span'); //uses a span element to display if there is no rating available
             ratingText.textContent = ` - Rating: ${place.rating ? place.rating : 'No rating available'}`;
 
             listItem.appendChild(link);
