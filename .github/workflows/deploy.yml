@@ -15,7 +15,9 @@ jobs:
 
       - name: Replace API Key in index.html
         run: |
-          sed -i "s/YOUR_PLACEHOLDER_API_KEY/${{ secrets.GOOGLE_API_KEY }}/g" index.html
+          awk '{gsub("YOUR_PLACEHOLDER_API_KEY", ENVIRON["GOOGLE_API_KEY"]); print}' index.html > temp.html && mv temp.html index.html
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
