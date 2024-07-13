@@ -23,7 +23,7 @@ jobs:
 
       - name: Inject API Key
         run: |
-          sed -i 's/YOUR_API_KEY_PLACEHOLDER/${{ secrets.GOOGLE_API_KEY }}/g' ./index.html
+          sed -i 's/YOUR_API_KEY_PLACEHOLDER/${{ secrets.GOOGLE_API_KEY }}/' index.html
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
