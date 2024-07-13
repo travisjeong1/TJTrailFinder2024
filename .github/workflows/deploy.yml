@@ -23,7 +23,7 @@ jobs:
 
       - name: Inject API Key
         run: |
-          sed -i 's/YOUR_API_KEY_PLACEHOLDER/${{ secrets.GOOGLE_API_KEY }}/g' index.html
+          sed -i 's/YOUR_API_KEY_PLACEHOLDER/${{ secrets.GOOGLE_API_KEY }}/g' ./index.html
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
@@ -31,4 +31,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./path/to/your/index.html
+          publish_dir: ./build
