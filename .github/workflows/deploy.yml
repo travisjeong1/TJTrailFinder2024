@@ -23,7 +23,7 @@ jobs:
 
       - name: Replace API Key in index.html
         run: |
-          sed -i "s/\${GOOGLE_API_KEY}/$GOOGLE_API_KEY/g" index.html
+          sed -i "s/YOUR_PLACEHOLDER_API_KEY$GOOGLE_API_KEY/g" index.html
 
       - name: Show updated index.html
         run: cat index.html  # Optional: Output the updated index.html to see changes
