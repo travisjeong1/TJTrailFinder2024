@@ -15,7 +15,7 @@ jobs:
 
     - name: Replace API Key in index.html
       run: |
-        sed -i "s/API/secrets.GOOGLE_API_KEY/g" index.html
+        sed -i "s/YOUR_API_PLACEHOLDER_KEY/secrets.GOOGLE_API_KEY/g" index.html
 
     - name: Show updated index.html
       run: cat index.html  # Optional: Output the updated index.html to see changes
@@ -23,6 +23,6 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: secrets.GITHUB_TOKEN
         publish_dir: .  # Adjust if your index.html is in a subdirectory
         publish_branch: gh-pages
